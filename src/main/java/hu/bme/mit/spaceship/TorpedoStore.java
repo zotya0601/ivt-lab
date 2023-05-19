@@ -31,6 +31,15 @@ public class TorpedoStore {
 
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
+      /* 
+       * An exception should be thrown when entering this if statement
+       * The reason for this is that the statements in the if operator represent states which are illegal
+       * The variable `numberOfTorpedoes` is an integer, so if we say it is less that 1 (<1), it means it is 0 or smaller
+       * We cannot shoot if we have 0 torpedoes, while negative amounts of torpedoes are not possible.
+       * 
+       * Furthermore, if we want to shoot more torpedoes than we have (numberOfTorpedoes parameter is larger than this.torpedoCount),
+       * we would get a negative amount of torpedoes, which is illegal
+      */
       throw new IllegalArgumentException("numberOfTorpedos");
     }
 
