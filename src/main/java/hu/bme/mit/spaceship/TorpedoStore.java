@@ -8,6 +8,7 @@ import java.util.Random;
 * (Deliberately contains bugs.)
 */
 public class TorpedoStore {
+  private final Random random = new Random();
 
   // rate of failing to fire torpedos [0.0, 1.0]
   private double FAILURE_RATE = 0.0; //NOSONAR
@@ -30,18 +31,26 @@ public class TorpedoStore {
 
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
-      new IllegalArgumentException("numberOfTorpedos");
+      /* 
+       * An exception should be thrown when entering this if statement
+       * The reason for this is that the statements in the if operator represent states which are illegal
+       * The variable `numberOfTorpedoes` is an integer, so if we say it is less that 1 (<1), it means it is 0 or smaller
+       * We cannot shoot if we have 0 torpedoes, while negative amounts of torpedoes are not possible.
+       * 
+       * Furthermore, if we want to shoot more torpedoes than we have (numberOfTorpedoes parameter is larger than this.torpedoCount),
+       * we would get a negative amount of torpedoes, which is illegal
+      */
+      throw new IllegalArgumentException("numberOfTorpedos");
     }
 
     boolean success = false;
 
     // simulate random overheating of the launcher bay which prevents firing
-    Random generator = new Random();
-    double r = generator.nextDouble();
+    double r = this.random.nextDouble();
 
     if (r >= FAILURE_RATE) {
       // successful firing
-      this.torpedoCount =- numberOfTorpedos;
+      this.torpedoCount -= numberOfTorpedos;
       success = true;
     } else {
       // simulated failure
