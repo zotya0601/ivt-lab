@@ -1,0 +1,8 @@
+További 5 teszteset a fireTorpedo függvényhez:
+      - Először az elsődleges TorpedoStore kell tüzeljen (első lövéskor csak az)
+      - Második lövéskor a secondary TorpedoStore kell lőjön (mind a kettő egyszer lőtt ekkor)
+      - Legelső lövéskor, ha a primary üres, akkor a secondary-t használja
+      - Ha az egyik üres, akkor 2 lövés esetén egyből lő kétszer
+      - Ha az egyik TorpedoStore hibát jelzett, nem próbálkozik a másikkal
+
+Kód olvasása alapján történt tesztírás nehézsége az, hogy meg kell hozzá érteni a kód működését. Ahogyan az előző labor során a SonarCube is jelezte, a kód komplexitása (olvashatósági szempontból) magas, és valóban nehezen is érthető.
